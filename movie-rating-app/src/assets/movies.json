@@ -35,6 +35,31 @@
 				"Drama"
 			],
 			"inTheaters": false
+		},
+		{
+			"id": 4,
+			"name": "Oppenheimer",
+			"description": "Upcoming Christopher Nolan film about J. Robert Oppenheimer, the American physicist who helped develop the atomic bomb.",
+			"image": "https://www.indiewire.com/wp-content/uploads/2021/07/Oppenheimer.jpg",
+			"rating": 5,
+			"genres": [
+				"Drama",
+				"History"
+			],
+			"inTheaters": true
+		},
+		{
+			"id": 5,
+			"name": "Tenet",
+			"description": "A secret agent embarks on a dangerous, time-bending mission to prevent the start of World War III.",
+			"image": "https://www.indiewire.com/wp-content/uploads/2020/05/Tenet.jpg",
+			"rating": 5,
+			"genres": [
+				"Action",
+				"Sci-Fi",
+				"Thriller"
+			],
+			"inTheaters": false
 		}
 	]
 }
