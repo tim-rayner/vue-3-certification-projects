@@ -8,6 +8,5 @@ import Home from "./views/Home.vue";
 </script>
 
 <template>
-  <!-- This is where your template goes	-->
   <Home />
 </template>

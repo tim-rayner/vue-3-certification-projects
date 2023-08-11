@@ -2,13 +2,14 @@
 import { items } from "@/assets/movies.json";
 import { ref } from "vue";
 import type { Movie } from "@/types/movie-types";
+import MovieCard from "@/components/MovieCard.vue";
 
 const movies = ref<Movie[]>(items as Movie[]);
 </script>
 <template>
-  <div v-for="movie in movies">
-    <h2>{{ movie.name }}</h2>
-    <p>{{ movie.description }}</p>
-    <p>{{ movie.rating }}</p>
+  <div class="flex movies my-24">
+    <div v-for="movie in movies" class="">
+      <MovieCard :movie="movie" />
+    </div>
   </div>
 </template>

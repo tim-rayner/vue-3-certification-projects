@@ -40,7 +40,7 @@
 			"id": 4,
 			"name": "Oppenheimer",
 			"description": "Upcoming Christopher Nolan film about J. Robert Oppenheimer, the American physicist who helped develop the atomic bomb.",
-			"image": "https://www.indiewire.com/wp-content/uploads/2021/07/Oppenheimer.jpg",
+			"image": "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg",
 			"rating": 5,
 			"genres": [
 				"Drama",
@@ -52,7 +52,7 @@
 			"id": 5,
 			"name": "Tenet",
 			"description": "A secret agent embarks on a dangerous, time-bending mission to prevent the start of World War III.",
-			"image": "https://www.indiewire.com/wp-content/uploads/2020/05/Tenet.jpg",
+			"image": "https://m.media-amazon.com/images/M/MV5BMzU3YWYwNTQtZTdiMC00NjY5LTlmMTMtZDFlYTEyODBjMTk5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg",
 			"rating": 5,
 			"genres": [
 				"Action",
