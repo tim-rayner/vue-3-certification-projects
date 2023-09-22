@@ -20,6 +20,10 @@ const purchase = () => {
   window.open("https://www.odeon.co.uk/", "_blank");
 };
 
+const watchTrailer = () => {
+  window.open(movie.value.trailer, "_blank");
+};
+
 const shortenDescription = (lngDescription: string) => {
   return lngDescription.substring(0, 100) + "...";
 };
@@ -27,7 +31,7 @@ const shortenDescription = (lngDescription: string) => {
 
 <template>
   <VueFlip
-    width="15vw"
+    width="25vw"
     height="55vh"
     :active-hover="true"
     class="hover:cursor-pointer mx-3 w-auto rounded-lg"
@@ -88,6 +92,12 @@ const shortenDescription = (lngDescription: string) => {
               v-if="movie.inTheaters"
             >
               Book Tickets
+            </button>
+            <button
+              class="purchase-btn bg-orange-400 text-black rounded-lg px-4 py-2 mt-2"
+              @click="watchTrailer"
+            >
+              Watch Trailer
             </button>
           </div>
         </div>

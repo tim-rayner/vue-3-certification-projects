@@ -8,4 +8,5 @@ export interface Movie {
   rating: number;
   genres: Genre[];
   inTheaters: boolean;
+  trailer: string;
 }
