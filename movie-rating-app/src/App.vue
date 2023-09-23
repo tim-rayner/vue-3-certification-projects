@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Navbar from "./components/Navbar.vue";
 import Home from "./views/Home.vue";
 /*
  This is an Icon that you can use to represent the stars if you like
@@ -8,5 +9,10 @@ import Home from "./views/Home.vue";
 </script>
 
 <template>
-  <Home />
+  <Navbar />
+  <div class="layout overflow-x-hidden">
+    <Home />
+  </div>
 </template>
+
+<style></style>

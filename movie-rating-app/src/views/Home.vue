@@ -7,7 +7,7 @@ import MovieCard from "@/components/MovieCard.vue";
 const movies = ref<Movie[]>(items as Movie[]);
 </script>
 <template>
-  <div class="flex movies my-44">
+  <div class="flex movies overflow-x-scroll no-scrollbar scrollbar-draggable">
     <div v-for="movie in movies" class="">
       <MovieCard :movie="movie" />
     </div>

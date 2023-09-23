@@ -3,13 +3,12 @@ import type { Movie } from "@/types/movie-types";
 import { StarIcon } from "@heroicons/vue/24/solid";
 import { VueFlip } from "vue-flip";
 import { computed, ref } from "vue";
-import type { Ref } from "vue";
 
 const props = defineProps<{
   movie: Movie;
 }>();
 
-const movie: Ref<Movie> = ref(props.movie);
+const movie = ref<Movie>(props.movie);
 
 const stars = computed(() => {
   const numStars = Math.floor(props.movie.rating);
@@ -30,7 +29,7 @@ const shortenDescription = (lngDescription: string) => {
 </script>
 
 <template>
-  <div class="w-[25vw] h-[55vh] relative mx-3">
+  <div class="w-[25vw] h-[35vh] relative mx-3">
     <VueFlip
       width="100%"
       height="100%"
