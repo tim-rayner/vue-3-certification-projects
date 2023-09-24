@@ -16,8 +16,13 @@ const reviewedMovies = movies.value
   .reverse();
 
 const topMovies = computed(() => {
-  return movies.value.filter((movie) => movie.rating >= 4);
+  return movies.value.filter((movie) => movie.rating >= 1);
 });
+
+const ratingChanged = (movie: Movie, newRating: number) => {
+  const targetMovie = movies.value.find((m) => m.name === movie.name);
+  targetMovie.rating = newRating;
+};
 </script>
 <template>
   <div>
@@ -29,7 +34,10 @@ const topMovies = computed(() => {
       class="flex flex-row movies overflow-x-scroll no-scrollbar scrollbar-draggable pt-2"
     >
       <div v-for="movie in topMovies">
-        <MovieCard :movie="movie" />
+        <MovieCard
+          :movie="movie"
+          @rating-changed="(newRating) => ratingChanged(movie, newRating)"
+        />
       </div>
     </div>
   </div>
@@ -47,7 +55,10 @@ const topMovies = computed(() => {
         </div>
       </div>
       <div v-for="movie in reviewedMovies">
-        <MovieCard :movie="movie" />
+        <MovieCard
+          :movie="movie"
+          @rating-changed="(newRating) => ratingChanged(movie, newRating)"
+        />
       </div>
     </div>
   </div>

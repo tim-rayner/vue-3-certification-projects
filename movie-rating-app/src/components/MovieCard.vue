@@ -1,28 +1,23 @@
 <script setup lang="ts">
 import type { Movie } from "@/types/movie-types";
-import { StarIcon } from "@heroicons/vue/24/solid";
 import { VueFlip } from "vue-flip";
-import { ComputedRef, computed, ref } from "vue";
+import { ComputedRef, defineEmits, computed, ref, onUpdated } from "vue";
 import Button from "@/components/Button.vue";
 import Pill from "./Pill.vue";
+import Rating from "./Rating.vue";
+
+const emit = defineEmits(["ratingChanged"]);
 
 const props = defineProps<{
   movie: Movie;
 }>();
-
-const movie = ref<Movie>(props.movie);
-
-const stars = computed(() => {
-  const numStars = Math.floor(props.movie.rating);
-  return Array(numStars).fill("");
-});
 
 const purchase = () => {
   window.open("https://www.odeon.co.uk/", "_blank");
 };
 
 const watchTrailer = () => {
-  window.open(movie.value.trailer, "_blank");
+  window.open(props.movie.trailer, "_blank");
 };
 
 const shortenDescription = (lngDescription: string) => {
@@ -30,8 +25,12 @@ const shortenDescription = (lngDescription: string) => {
 };
 
 const genres: ComputedRef<Array<string>> = computed(() => {
-  return movie.value.genres;
+  return props.movie.genres;
 });
+
+const updateRating = (newRating: number) => {
+  emit("ratingChanged", newRating);
+};
 </script>
 
 <template>
@@ -62,11 +61,7 @@ const genres: ComputedRef<Array<string>> = computed(() => {
             <div class="title text-4xl font-semibold text-white">
               {{ movie.name }}
             </div>
-            <div class="stars-wrapper flex flex-row my-1">
-              <div class="star" v-for="star in stars">
-                <StarIcon class="h-6 w-6 mr-1 text-yellow-400" :key="star" />
-              </div>
-            </div>
+            <Rating :rating="movie.rating" :functional="false" />
             <div class="flex flex-row">
               <div
                 class="genres text-white text-sm my-2"
@@ -93,11 +88,7 @@ const genres: ComputedRef<Array<string>> = computed(() => {
             <div class="title text-4xl font-semibold text-white">
               {{ movie.name }}
             </div>
-            <div class="stars-wrapper flex flex-row my-1">
-              <div class="star" v-for="star in stars">
-                <StarIcon class="h-6 w-6 mr-1 text-yellow-400" :key="star" />
-              </div>
-            </div>
+            <Rating :rating="movie.rating" @update-rating="updateRating" />
             <div class="flex flex-row">
               <div
                 class="genres text-white text-sm my-2"
