@@ -2,8 +2,9 @@
 import type { Movie } from "@/types/movie-types";
 import { StarIcon } from "@heroicons/vue/24/solid";
 import { VueFlip } from "vue-flip";
-import { computed, ref } from "vue";
+import { ComputedRef, computed, ref } from "vue";
 import Button from "@/components/Button.vue";
+import Pill from "./Pill.vue";
 
 const props = defineProps<{
   movie: Movie;
@@ -27,6 +28,10 @@ const watchTrailer = () => {
 const shortenDescription = (lngDescription: string) => {
   return lngDescription.substring(0, 100) + "...";
 };
+
+const genres: ComputedRef<Array<string>> = computed(() => {
+  return movie.value.genres;
+});
 </script>
 
 <template>
@@ -62,6 +67,14 @@ const shortenDescription = (lngDescription: string) => {
                 <StarIcon class="h-6 w-6 mr-1 text-yellow-400" :key="star" />
               </div>
             </div>
+            <div class="flex flex-row">
+              <div
+                class="genres text-white text-sm my-2"
+                v-for="genre in genres"
+              >
+                <Pill :label="genre" severity="primary" />
+              </div>
+            </div>
             <div class="description text-white text-sm">
               {{ shortenDescription(movie.description) }}
             </div>
@@ -83,6 +96,14 @@ const shortenDescription = (lngDescription: string) => {
             <div class="stars-wrapper flex flex-row my-1">
               <div class="star" v-for="star in stars">
                 <StarIcon class="h-6 w-6 mr-1 text-yellow-400" :key="star" />
+              </div>
+            </div>
+            <div class="flex flex-row">
+              <div
+                class="genres text-white text-sm my-2"
+                v-for="genre in genres"
+              >
+                <Pill :label="genre" severity="primary" />
               </div>
             </div>
             <div class="description text-white text-lg">

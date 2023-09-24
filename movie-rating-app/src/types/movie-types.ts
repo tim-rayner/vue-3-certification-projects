@@ -2,7 +2,7 @@ import type { Genre } from "@/enums/movie-enums";
 
 export interface Movie {
   id: number;
-  name: string;
+  name: String;
   description: string;
   image: string;
   rating: number;
