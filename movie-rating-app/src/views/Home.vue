@@ -20,7 +20,7 @@ const topMovies = computed(() => {
 });
 </script>
 <template>
-  <div class="">
+  <div>
     <h2 class="font-bold text-4xl m-4 mb-2">Popular</h2>
     <h4 class="font-normal text-lg m-4 mt-2 underline hover:cursor-pointer">
       View all...
@@ -28,12 +28,12 @@ const topMovies = computed(() => {
     <div
       class="flex flex-row movies overflow-x-scroll no-scrollbar scrollbar-draggable pt-2"
     >
-      <div v-for="movie in topMovies" class="">
+      <div v-for="movie in topMovies">
         <MovieCard :movie="movie" />
       </div>
     </div>
   </div>
-  <div class="my-">
+  <div class="my-12">
     <h2 class="font-bold text-4xl m-4 mb-2">Recently reviewed</h2>
 
     <div
@@ -46,7 +46,7 @@ const topMovies = computed(() => {
           <p class="text-2xl text-white">Add New</p>
         </div>
       </div>
-      <div v-for="movie in reviewedMovies" class="">
+      <div v-for="movie in reviewedMovies">
         <MovieCard :movie="movie" />
       </div>
     </div>
