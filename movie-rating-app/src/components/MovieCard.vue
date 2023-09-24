@@ -3,6 +3,7 @@ import type { Movie } from "@/types/movie-types";
 import { StarIcon } from "@heroicons/vue/24/solid";
 import { VueFlip } from "vue-flip";
 import { computed, ref } from "vue";
+import Button from "@/components/Button.vue";
 
 const props = defineProps<{
   movie: Movie;
@@ -61,7 +62,7 @@ const shortenDescription = (lngDescription: string) => {
                 <StarIcon class="h-6 w-6 mr-1 text-yellow-400" :key="star" />
               </div>
             </div>
-            <div class="description text-white text-lg">
+            <div class="description text-white text-sm">
               {{ shortenDescription(movie.description) }}
             </div>
           </div>
@@ -69,7 +70,9 @@ const shortenDescription = (lngDescription: string) => {
       </template>
       <!-- BACK -->
       <template v-slot:back>
-        <div class="content rounded-lg p-2 h-full relative shadow-xl">
+        <div
+          class="content rounded-lg p-2 h-full relative shadow-xl bg-gray-800"
+        >
           <div
             class="overlay absolute b-0 top-0 left-0 right-0 w-full h-full rounded-lg bg-black z-20 opacity-60"
           ></div>
@@ -85,24 +88,23 @@ const shortenDescription = (lngDescription: string) => {
             <div class="description text-white text-lg">
               {{ movie.description }}
             </div>
-            <div class="purchase-btn-wrapper flex flex-row">
-              <button
-                class="purchase-btn bg-yellow-400 text-black rounded-lg px-4 py-2 mt-2"
+            <div class="purchase-btn-wrapper flex flex-col">
+              <Button
+                size="md"
+                label="Book Tickets"
+                severity="primary"
                 @click="purchase"
                 v-if="movie.inTheaters"
-              >
-                Book Tickets
-              </button>
-              <button
-                class="purchase-btn bg-orange-400 text-black rounded-lg px-4 py-2 mt-2"
+              />
+              <Button
                 @click="watchTrailer"
-              >
-                Watch Trailer
-              </button>
+                size="md"
+                label="Watch Trailer"
+                severity="secondary"
+              />
             </div>
-          </div>
-        </div></template
-      >
+          </div></div
+      ></template>
     </VueFlip>
   </div>
 </template>
