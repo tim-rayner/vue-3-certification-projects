@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { items } from "@/assets/movies.json";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import type { Movie } from "@/types/movie-types";
 import MovieCard from "@/components/MovieCard.vue";
 
@@ -14,6 +14,10 @@ const reviewedMovies = movies.value
       movie.name === "The Godfather"
   )
   .reverse();
+
+const topMovies = computed(() => {
+  return movies.value.filter((movie) => movie.rating >= 4);
+});
 </script>
 <template>
   <div class="">
@@ -24,7 +28,7 @@ const reviewedMovies = movies.value
     <div
       class="flex flex-row movies overflow-x-scroll no-scrollbar scrollbar-draggable pt-2"
     >
-      <div v-for="movie in movies" class="">
+      <div v-for="movie in topMovies" class="">
         <MovieCard :movie="movie" />
       </div>
     </div>
