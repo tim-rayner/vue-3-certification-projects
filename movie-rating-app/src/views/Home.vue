@@ -6,14 +6,9 @@ import MovieCard from "@/components/MovieCard.vue";
 
 const movies = ref<Movie[]>(items as Movie[]);
 
-const reviewedMovies = movies.value
-  .filter(
-    (movie) =>
-      movie.name === "The Dark Knight" ||
-      movie.name === "Tenet" ||
-      movie.name === "The Godfather"
-  )
-  .reverse();
+const reviewedMovies = computed(() =>
+  movies.value.filter((movie) => movie.rated).reverse()
+);
 
 const topMovies = computed(() => {
   return movies.value.filter((movie) => movie.rating >= 1);
@@ -21,7 +16,10 @@ const topMovies = computed(() => {
 
 const ratingChanged = (movie: Movie, newRating: number) => {
   const targetMovie = movies.value.find((m) => m.name === movie.name);
-  if (targetMovie) targetMovie.rating = newRating;
+  if (targetMovie) {
+    targetMovie.rating = newRating;
+    targetMovie.rated = true;
+  }
 };
 </script>
 <template>

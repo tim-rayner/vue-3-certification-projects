@@ -8,7 +8,8 @@
       "rating": 3,
       "genres": ["Action", "Crime", "Drama"],
       "inTheaters": false,
-      "trailer": "https://www.youtube.com/watch?v=_PZpmTj1Q8Q"
+      "trailer": "https://www.youtube.com/watch?v=_PZpmTj1Q8Q",
+      "rated": false
     },
     {
       "id": 2,
@@ -18,7 +19,8 @@
       "rating": 5,
       "genres": ["Drama", "History"],
       "inTheaters": true,
-      "trailer": "https://www.youtube.com/watch?v=bK6ldnjE3Y0"
+      "trailer": "https://www.youtube.com/watch?v=bK6ldnjE3Y0",
+      "rated": false
     },
     {
       "id": 3,
@@ -28,7 +30,8 @@
       "rating": 5,
       "genres": ["Action", "Sci-Fi", "Thriller"],
       "inTheaters": false,
-      "trailer": "https://www.youtube.com/watch?v=LdOM0x0XDMo"
+      "trailer": "https://www.youtube.com/watch?v=LdOM0x0XDMo",
+      "rated": false
     },
     {
       "id": 4,
@@ -38,7 +41,8 @@
       "rating": 4,
       "genres": ["Crime", "Drama"],
       "inTheaters": false,
-      "trailer": "https://www.youtube.com/watch?v=sY1S34973zA"
+      "trailer": "https://www.youtube.com/watch?v=sY1S34973zA",
+      "rated": false
     },
     {
       "id": 5,
@@ -48,7 +52,8 @@
       "rating": 4,
       "genres": ["Drama"],
       "inTheaters": false,
-      "trailer": "https://www.youtube.com/watch?v=PLl99DlL6b4"
+      "trailer": "https://www.youtube.com/watch?v=PLl99DlL6b4",
+      "rated": false
     }
   ]
 }
