@@ -2,11 +2,6 @@
 import { computed, ref } from "vue";
 import { StarIcon } from "@heroicons/vue/24/solid";
 
-type Star = {
-  value: number;
-  active: boolean;
-};
-
 const emit = defineEmits(["updateRating"]);
 
 const props = defineProps({
@@ -22,6 +17,7 @@ const props = defineProps({
 });
 
 const hoverActive = ref<Boolean>(false);
+const hoverRating = ref<number | null>(null);
 
 const stars = computed(() => {
   const ratings = [1, 2, 3, 4, 5];
@@ -31,19 +27,26 @@ const stars = computed(() => {
   });
 });
 
-const handleHover = () => {};
-const handleHoverLeave = () => {};
-
 const submitRating = (rating: number) => {
   emit("updateRating", rating);
 };
 
 //there will always be 5 stars, its just an array of which stars are active
-const starActive = (starNumber: number) => starNumber <= props.rating;
+const starActive = (starNumber: number) => {
+  if (!hoverActive.value) {
+    return starNumber <= props.rating;
+  } else {
+    return starNumber <= hoverRating.value!;
+  }
+};
 </script>
 
 <template>
-  <div class="functional-stars-wrapper flex flex-row my-1">
+  <div
+    class="functional-stars-wrapper flex flex-row my-1"
+    @mouseover="hoverActive = true"
+    @mouseleave="hoverActive = false"
+  >
     <div class="" v-for="star in stars">
       <StarIcon
         class="h-6 w-6 mr-1"
@@ -52,9 +55,8 @@ const starActive = (starNumber: number) => starNumber <= props.rating;
           'text-gray-500': !star.active,
         }"
         :key="star.value"
-        @mouseover="handleHover"
         @click="submitRating(star.value)"
-        @mouseleave="handleHoverLeave"
+        @mouseover="hoverRating = star.value"
       />
     </div>
   </div>

@@ -21,7 +21,7 @@ const topMovies = computed(() => {
 
 const ratingChanged = (movie: Movie, newRating: number) => {
   const targetMovie = movies.value.find((m) => m.name === movie.name);
-  targetMovie.rating = newRating;
+  if (targetMovie) targetMovie.rating = newRating;
 };
 </script>
 <template>
