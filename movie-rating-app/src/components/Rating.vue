@@ -48,16 +48,20 @@ const starActive = (starNumber: number) => {
     @mouseleave="hoverActive = false"
   >
     <div class="" v-for="star in stars">
-      <StarIcon
-        class="h-6 w-6 mr-1"
-        :class="{
-          'text-yellow-400': star.active,
-          'text-gray-500': !star.active,
-        }"
-        :key="star.value"
+      <button
+        :disabled="star.value === rating"
         @click="submitRating(star.value)"
-        @mouseover="hoverRating = star.value"
-      />
+      >
+        <StarIcon
+          class="h-6 w-6 mr-1"
+          :class="{
+            'text-yellow-400': star.active,
+            'text-gray-500': !star.active,
+          }"
+          :key="star.value"
+          @mouseover="hoverRating = star.value"
+        />
+      </button>
     </div>
   </div>
 </template>
