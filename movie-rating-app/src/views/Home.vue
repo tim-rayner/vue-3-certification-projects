@@ -11,7 +11,7 @@ const reviewedMovies = computed(() =>
 );
 
 const topMovies = computed(() => {
-  return movies.value.filter((movie) => movie.rating >= 1);
+  return movies.value.filter((movie) => movie.rating >= 0);
 });
 
 const ratingChanged = (movie: Movie, newRating: number) => {

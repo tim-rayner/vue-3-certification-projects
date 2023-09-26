@@ -55,7 +55,7 @@ const starActive = (starNumber: number) => {
         <StarIcon
           class="h-6 w-6 mr-1"
           :class="{
-            'text-yellow-400': star.active,
+            'text-yellow-500': star.active,
             'text-gray-500': !star.active,
           }"
           :key="star.value"
