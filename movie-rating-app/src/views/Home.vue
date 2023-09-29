@@ -25,7 +25,6 @@ const ratingChanged = (movie: Movie, newRating: number) => {
 };
 
 const togglePostMovie = (newval: boolean) => {
-  console.log("test worked");
   postMovieVisible.value = newval;
 };
 </script>
@@ -71,5 +70,6 @@ const togglePostMovie = (newval: boolean) => {
   <PostMovieModal
     @visible-changed="togglePostMovie"
     :visible="postMovieVisible"
+    header="Add New Movie"
   />
 </template>
