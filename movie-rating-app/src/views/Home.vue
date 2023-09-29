@@ -3,8 +3,10 @@ import { items } from "@/assets/movies.json";
 import { computed, ref } from "vue";
 import type { Movie } from "@/types/movie-types";
 import MovieCard from "@/components/MovieCard.vue";
+import PostMovieModal from "@/components/Modal.vue";
 
 const movies = ref<Movie[]>(items as Movie[]);
+const postMovieVisible = ref(false);
 
 const reviewedMovies = computed(() =>
   movies.value.filter((movie) => movie.rated).reverse()
@@ -20,6 +22,11 @@ const ratingChanged = (movie: Movie, newRating: number) => {
     targetMovie.rating = newRating;
     targetMovie.rated = true;
   }
+};
+
+const togglePostMovie = (newval: boolean) => {
+  console.log("test worked");
+  postMovieVisible.value = newval;
 };
 </script>
 <template>
@@ -45,7 +52,7 @@ const ratingChanged = (movie: Movie, newRating: number) => {
     <div
       class="flex flex-row movies overflow-x-scroll no-scrollbar scrollbar-draggable pt-2"
     >
-      <div id="create-new">
+      <div id="create-new" @click="postMovieVisible = true">
         <div
           class="w-[25vw] h-[35vh] relative mx-3 border rounded-lg p-2 shadow-xl border-dashed items-center justify-center flex flex-col hover:cursor-pointer bg-gray-800"
         >
@@ -60,4 +67,9 @@ const ratingChanged = (movie: Movie, newRating: number) => {
       </div>
     </div>
   </div>
+
+  <PostMovieModal
+    @visible-changed="togglePostMovie"
+    :visible="postMovieVisible"
+  />
 </template>
