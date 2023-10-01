@@ -4,6 +4,7 @@ import { computed, ref } from "vue";
 import type { Movie } from "@/types/movie-types";
 import MovieCard from "@/components/MovieCard.vue";
 import PostMovieModal from "@/components/Modal.vue";
+import NewMovieForm from "@/components/Forms/NewMovieForm.vue";
 
 const movies = ref<Movie[]>(items as Movie[]);
 const postMovieVisible = ref(false);
@@ -71,5 +72,7 @@ const togglePostMovie = (newval: boolean) => {
     @visible-changed="togglePostMovie"
     :visible="postMovieVisible"
     header="Add New Movie"
-  />
+  >
+    <NewMovieForm />
+  </PostMovieModal>
 </template>

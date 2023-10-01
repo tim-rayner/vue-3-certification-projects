@@ -1,8 +1,8 @@
 import type { Genre } from "@/enums/movie-enums";
 
 export interface Movie {
-  id: number;
-  name: String;
+  id?: number;
+  name: string;
   description: string;
   image: string;
   rating: number;
