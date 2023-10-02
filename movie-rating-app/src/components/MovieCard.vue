@@ -75,22 +75,6 @@ const updateRating = (newRating: number) => {
               {{ shortenDescription(movie.description) }}
             </div>
           </div>
-          <div class="absolute bottom-[10%] right-[15%]">
-            <div class="">
-              <StarIcon
-                class="h-20 w-20 mr-1 z-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                :class="{
-                  'text-yellow-500': movie.rating >= 1,
-                  'text-gray-500': movie.rating < 1,
-                }"
-              />
-              <p
-                class="text-black z-50 text-3xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-              >
-                {{ movie.rating === 0 ? "-" : movie.rating }}
-              </p>
-            </div>
-          </div>
         </div>
       </template>
       <!-- BACK -->

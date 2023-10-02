@@ -50,19 +50,21 @@ const onSubmit = async () => {
     <div class="flex flex-col gap-2">
       <label for="title"> Title</label>
       <InputText id="title" v-bind="nameInput" aria-describedby="title-help" />
-      <small id="title-help"> {{ errors.name }}</small>
+      <small id="title-help" class="p-error"> {{ errors.name }}</small>
     </div>
     <!--DESCRIPTION-->
     <div class="flex flex-col gap-2">
       <label for="description">Description</label>
       <Textarea id="description" v-bind="descriptionInput" rows="5" cols="30" />
-      <small id="description-help"> {{ errors.description }}</small>
+      <small id="description-help" class="p-error">
+        {{ errors.description }}</small
+      >
     </div>
     <!--Image-->
     <div class="flex flex-col gap-2">
       <label for="image">Image</label>
       <InputText id="image" v-bind="imageInput" aria-describedby="image-help" />
-      <small id="image-help"> {{ errors.image }}</small>
+      <small id="image-help" class="p-error"> {{ errors.image }}</small>
     </div>
     <!--Trailer -->
     <div class="flex flex-col gap-2">
@@ -72,7 +74,7 @@ const onSubmit = async () => {
         v-bind="trailerInput"
         aria-describedby="trailer-help"
       />
-      <small id="image-help"> {{ errors.trailer }}</small>
+      <small id="image-help" class="p-error"> {{ errors.trailer }}</small>
     </div>
     <!--Genres-->
     <div class="flex flex-col gap-2">
@@ -82,7 +84,7 @@ const onSubmit = async () => {
         v-bind="genresInput"
         aria-describedby="genres-help"
       />
-      <small id="genres-help"> {{ errors.genres }}</small>
+      <small id="genres-help" class="p-error"> {{ errors.genres }}</small>
     </div>
     <!--IN THEATRES -->
     <div class="flex flex-col gap-2">
@@ -101,7 +103,7 @@ const onSubmit = async () => {
         v-bind="ratingInput"
         aria-describedby="rating-help"
       />
-      <small id="rating-help"> {{ errors.rating }}</small>
+      <small id="rating-help" class="p-error"> {{ errors.rating }}</small>
     </div>
 
     <!-- Submit -->
