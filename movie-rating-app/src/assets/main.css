@@ -1,13 +1,11 @@
 @import "primevue/resources/themes/saga-blue/theme.css";
 @import "primevue/resources/primevue.min.css";
+@import "primeicons/primeicons.css";
+@import "./base.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-#app {
-  font-weight: normal;
-}
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
@@ -113,4 +111,16 @@
   background-color: #f7fafc;
   color: #1a202c;
   border: 1px solid #f7fafc;
+}
+
+.btn-invisible {
+  background: transparent;
+  border: none;
+}
+.btn-invisible:hover {
+  cursor: pointer;
+}
+.btn-invisible:active {
+  border: none;
+  outline: none;
 }

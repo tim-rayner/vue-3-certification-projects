@@ -4,8 +4,10 @@ import { Movie } from "@/types/movie-types";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import InputSwitch from "primevue/inputswitch";
-import { ref } from "vue";
-
+import { onMounted, ref } from "vue";
+import { useForm } from "vee-validate";
+import { addMovieSchema } from "@/validation/create-rating-validation";
+import Button from "primevue/button";
 /**
  * @TODO add the following form items
  *  - Title
@@ -24,53 +26,42 @@ import { ref } from "vue";
  *  - embed trailer in iframe
  */
 
-const movieDefaults: Movie = {
-  name: "",
-  description: "",
-  image: "",
-  rating: 0,
-  genres: [] as Genre[],
-  inTheaters: false,
-  trailer: "",
-  rated: false,
+const { values, errors, defineInputBinds, validate } = useForm({
+  validationSchema: addMovieSchema,
+});
+
+const nameInput = defineInputBinds("name");
+const descriptionInput = defineInputBinds("description");
+const imageInput = defineInputBinds("image");
+const ratingInput = defineInputBinds("rating");
+const genresInput = defineInputBinds("genres");
+const inTheatresInput = defineInputBinds("inTheaters");
+const trailerInput = defineInputBinds("trailer");
+
+const onSubmit = async () => {
+  const valid = await validate();
+  if (valid.valid) console.log("submitting");
 };
-
-const errors: Object = {};
-
-const newMovie = ref<Movie>(movieDefaults);
 </script>
 
 <template>
-  <form>
+  <form @submit.prevent="onSubmit">
     <!--TITLE-->
     <div class="flex flex-col gap-2">
       <label for="title"> Title</label>
-      <InputText
-        id="title"
-        v-model="newMovie.name"
-        aria-describedby="title-help"
-      />
-      <small id="title-help"> {{ errors.title }}</small>
+      <InputText id="title" v-bind="nameInput" aria-describedby="title-help" />
+      <small id="title-help"> {{ errors.name }}</small>
     </div>
     <!--DESCRIPTION-->
     <div class="flex flex-col gap-2">
       <label for="description">Description</label>
-      <Textarea
-        id="description"
-        v-model="newMovie.description"
-        rows="5"
-        cols="30"
-      />
+      <Textarea id="description" v-bind="descriptionInput" rows="5" cols="30" />
       <small id="description-help"> {{ errors.description }}</small>
     </div>
     <!--Image-->
     <div class="flex flex-col gap-2">
       <label for="image">Image</label>
-      <InputText
-        id="image"
-        v-model="newMovie.image"
-        aria-describedby="image-help"
-      />
+      <InputText id="image" v-bind="imageInput" aria-describedby="image-help" />
       <small id="image-help"> {{ errors.image }}</small>
     </div>
     <!--Trailer -->
@@ -78,7 +69,7 @@ const newMovie = ref<Movie>(movieDefaults);
       <label for="trailer">Trailer link</label>
       <InputText
         id="trailer"
-        v-model="newMovie.trailer"
+        v-bind="trailerInput"
         aria-describedby="trailer-help"
       />
       <small id="image-help"> {{ errors.trailer }}</small>
@@ -88,7 +79,7 @@ const newMovie = ref<Movie>(movieDefaults);
       <label for="genres">Genres</label>
       <InputText
         id="genres"
-        v-model="newMovie.genres"
+        v-bind="genresInput"
         aria-describedby="genres-help"
       />
       <small id="genres-help"> {{ errors.genres }}</small>
@@ -96,7 +87,7 @@ const newMovie = ref<Movie>(movieDefaults);
     <!--IN THEATRES -->
     <div class="flex flex-col gap-2">
       <label for="genres">In Theatres </label>
-      <InputSwitch v-model="newMovie.inTheaters" />
+      <InputSwitch v-bind="inTheatresInput" />
     </div>
 
     <!--RATING-->
@@ -105,10 +96,15 @@ const newMovie = ref<Movie>(movieDefaults);
       <InputText
         id="rating"
         type="number"
-        v-model="newMovie.rating"
+        max="5"
+        min="0"
+        v-bind="ratingInput"
         aria-describedby="rating-help"
       />
       <small id="rating-help"> {{ errors.rating }}</small>
     </div>
+
+    <!-- Submit -->
+    <Button type="submit" label="Submit" />
   </form>
 </template>

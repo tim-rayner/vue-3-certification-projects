@@ -5,5 +5,8 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  corePlugins: {
+    preflight: false,
+  },
   purge: ["./src/**/*.html", "./src/**/*.vue", "./src/**/*.jsx"],
 };

@@ -51,6 +51,7 @@ const starActive = (starNumber: number) => {
       <button
         :disabled="star.value === rating"
         @click="submitRating(star.value)"
+        class="btn-invisible"
       >
         <StarIcon
           class="h-6 w-6 mr-1"

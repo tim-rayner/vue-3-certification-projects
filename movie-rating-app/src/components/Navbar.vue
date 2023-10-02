@@ -6,7 +6,7 @@ const menuToggled = ref(false);
 </script>
 
 <template>
-  <nav class="bg-gray-800">
+  <nav class="bg-gray-800 m-0">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -101,7 +101,7 @@ const menuToggled = ref(false);
         >
           <button
             type="button"
-            class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+            class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 btn-invisible"
           >
             <span class="absolute -inset-1.5"></span>
             <span class="sr-only">View notifications</span>
@@ -126,7 +126,7 @@ const menuToggled = ref(false);
             <div>
               <button
                 type="button"
-                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                class="btn-invisible relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 id="user-menu-button"
                 aria-expanded="false"
                 aria-haspopup="true"
