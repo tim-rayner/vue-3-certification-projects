@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Movie } from "@/types/movie-types";
 import { VueFlip } from "vue-flip";
-import { ComputedRef, defineEmits, computed } from "vue";
+import { ComputedRef, computed } from "vue";
 import Button from "@/components/Button.vue";
 import Pill from "./Pill.vue";
 import Rating from "./Rating.vue";

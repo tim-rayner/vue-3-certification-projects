@@ -4,6 +4,7 @@ import { Movie } from "@/types/movie-types";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import InputSwitch from "primevue/inputswitch";
+import { ref } from "vue";
 
 /**
  * @TODO add the following form items
@@ -23,7 +24,7 @@ import InputSwitch from "primevue/inputswitch";
  *  - embed trailer in iframe
  */
 
-const newMovie: Movie = {
+const movieDefaults: Movie = {
   name: "",
   description: "",
   image: "",
@@ -35,6 +36,8 @@ const newMovie: Movie = {
 };
 
 const errors: Object = {};
+
+const newMovie = ref<Movie>(movieDefaults);
 </script>
 
 <template>
@@ -92,9 +95,10 @@ const errors: Object = {};
     </div>
     <!--IN THEATRES -->
     <div class="flex flex-col gap-2">
-      <label for="genres">In Theatres</label>
+      <label for="genres">In Theatres </label>
       <InputSwitch v-model="newMovie.inTheaters" />
     </div>
+
     <!--RATING-->
     <div class="flex flex-col gap-2">
       <label for="rating">Rating</label>

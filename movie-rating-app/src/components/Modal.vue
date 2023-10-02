@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Dialog from "primevue/dialog";
-import { defineProps, defineEmits } from "vue";
 
 interface Props {
   visible: boolean;
