@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { Genre } from "@/enums/movie-enums";
-import { Movie } from "@/types/movie-types";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import InputSwitch from "primevue/inputswitch";
-import { onMounted, ref } from "vue";
+
 import { useForm } from "vee-validate";
 import { addMovieSchema } from "@/validation/create-rating-validation";
 import Button from "primevue/button";
@@ -26,6 +24,8 @@ import Button from "primevue/button";
  *  - embed trailer in iframe
  */
 
+const emit = defineEmits(["newMovie"]);
+
 const { values, errors, defineInputBinds, validate } = useForm({
   validationSchema: addMovieSchema,
 });
@@ -40,7 +40,7 @@ const trailerInput = defineInputBinds("trailer");
 
 const onSubmit = async () => {
   const valid = await validate();
-  if (valid.valid) console.log("submitting");
+  if (valid.valid) emit("newMovie", values);
 };
 </script>
 

@@ -18,15 +18,21 @@ const topMovies = computed(() => {
 });
 
 const ratingChanged = (movie: Movie, newRating: number) => {
-  const targetMovie = movies.value.find((m) => m.name === movie.name);
-  if (targetMovie) {
-    targetMovie.rating = newRating;
-    targetMovie.rated = true;
+  const targetIndex = movies.value.findIndex((m) => m.name === movie.name);
+  if (targetIndex !== -1) {
+    const targetMovie = movies.value[targetIndex];
+    const newMovie = { ...targetMovie, rated: true, rating: newRating };
+    movies.value.splice(targetIndex, 1, newMovie);
   }
 };
 
 const togglePostMovie = (newval: boolean) => {
   postMovieVisible.value = newval;
+};
+
+const handleNewMovie = (newMovie: Movie) => {
+  movies.value.push(newMovie);
+  postMovieVisible.value = false;
 };
 </script>
 <template>
@@ -73,6 +79,6 @@ const togglePostMovie = (newval: boolean) => {
     :visible="postMovieVisible"
     header="Add New Movie"
   >
-    <NewMovieForm />
+    <NewMovieForm @new-movie="handleNewMovie" />
   </PostMovieModal>
 </template>
