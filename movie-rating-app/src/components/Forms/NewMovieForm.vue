@@ -2,11 +2,12 @@
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import InputSwitch from "primevue/inputswitch";
-
+import Chips from "primevue/chips";
 import { useForm } from "vee-validate";
 import { addMovieSchema } from "@/validation/create-rating-validation";
 import Button from "primevue/button";
 import Rating from "@/components/Rating.vue";
+import { ref, watch } from "vue";
 /**
  * @TODO add the following form items
  *  - Title
@@ -29,15 +30,39 @@ const emit = defineEmits(["newMovie"]);
 
 const { values, errors, defineInputBinds, validate, setFieldValue } = useForm({
   validationSchema: addMovieSchema,
+  initialValues: {
+    name: "",
+    description: "",
+    image: "",
+    rating: 0,
+    trailer: "",
+    genres: [],
+    inTheaters: false,
+  },
 });
 
 const nameInput = defineInputBinds("name");
 const descriptionInput = defineInputBinds("description");
 const imageInput = defineInputBinds("image");
 const ratingInput = defineInputBinds("rating");
-const genresInput = defineInputBinds("genres");
-const inTheatresInput = defineInputBinds("inTheaters");
 const trailerInput = defineInputBinds("trailer");
+
+const inTheatresVal = ref(false);
+const genresVal = ref([]);
+
+watch(
+  () => inTheatresVal.value,
+  (val) => {
+    setFieldValue("inTheaters", val);
+  }
+);
+
+watch(
+  () => genresVal.value,
+  (val) => {
+    setFieldValue("genres", val);
+  }
+);
 
 const updateRating = (rating: number) => {
   setFieldValue("rating", rating);
@@ -45,6 +70,7 @@ const updateRating = (rating: number) => {
 
 const onSubmit = async () => {
   const valid = await validate();
+  console.log(values);
   if (valid.valid) emit("newMovie", values);
 };
 </script>
@@ -60,7 +86,7 @@ const onSubmit = async () => {
     <!--DESCRIPTION-->
     <div class="flex flex-col gap-2">
       <label for="description">Description</label>
-      <Textarea id="description" v-bind="descriptionInput" rows="5" cols="30" />
+      <Textarea id="description" v-bind="descriptionInput" rows="3" cols="30" />
       <small id="description-help" class="p-error">
         {{ errors.description }}</small
       >
@@ -84,17 +110,16 @@ const onSubmit = async () => {
     <!--Genres-->
     <div class="flex flex-col gap-2">
       <label for="genres">Genres</label>
-      <InputText
-        id="genres"
-        v-bind="genresInput"
-        aria-describedby="genres-help"
-      />
+      <small> input relevant genres seperated with commars</small>
+      <div class="card p-fluid">
+        <Chips v-model="genresVal" separator="," />
+      </div>
       <small id="genres-help" class="p-error"> {{ errors.genres }}</small>
     </div>
     <!--IN THEATRES -->
     <div class="flex flex-col gap-2">
       <label for="genres">In Theatres </label>
-      <input type="checkbox" v-bind="inTheatresInput" />
+      <InputSwitch v-model="inTheatresVal" />
     </div>
 
     <!--RATING-->
