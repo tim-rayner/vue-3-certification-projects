@@ -6,6 +6,7 @@ import InputSwitch from "primevue/inputswitch";
 import { useForm } from "vee-validate";
 import { addMovieSchema } from "@/validation/create-rating-validation";
 import Button from "primevue/button";
+import Rating from "@/components/Rating.vue";
 /**
  * @TODO add the following form items
  *  - Title
@@ -26,7 +27,7 @@ import Button from "primevue/button";
 
 const emit = defineEmits(["newMovie"]);
 
-const { values, errors, defineInputBinds, validate } = useForm({
+const { values, errors, defineInputBinds, validate, setFieldValue } = useForm({
   validationSchema: addMovieSchema,
 });
 
@@ -37,6 +38,10 @@ const ratingInput = defineInputBinds("rating");
 const genresInput = defineInputBinds("genres");
 const inTheatresInput = defineInputBinds("inTheaters");
 const trailerInput = defineInputBinds("trailer");
+
+const updateRating = (rating: number) => {
+  setFieldValue("rating", rating);
+};
 
 const onSubmit = async () => {
   const valid = await validate();
@@ -89,19 +94,16 @@ const onSubmit = async () => {
     <!--IN THEATRES -->
     <div class="flex flex-col gap-2">
       <label for="genres">In Theatres </label>
-      <InputSwitch v-bind="inTheatresInput" />
+      <input type="checkbox" v-bind="inTheatresInput" />
     </div>
 
     <!--RATING-->
     <div class="flex flex-col gap-2">
       <label for="rating">Rating</label>
-      <InputText
-        id="rating"
-        type="number"
-        max="5"
-        min="0"
-        v-bind="ratingInput"
-        aria-describedby="rating-help"
+      <Rating
+        :rating="ratingInput.value"
+        :functional="true"
+        @update-rating="updateRating"
       />
       <small id="rating-help" class="p-error"> {{ errors.rating }}</small>
     </div>
