@@ -15,7 +15,7 @@ const onRatingAvgChanged = (rating: number) => {
 
 <template>
   <Navbar :avgRating="avgRating" />
-  <div class="layout overflow-x-hidden">
+  <div class="layout overflow-x-hidden mt-16">
     <Home @avg-rating-changed="onRatingAvgChanged" />
   </div>
 </template>

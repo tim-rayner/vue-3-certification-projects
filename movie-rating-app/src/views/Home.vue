@@ -88,7 +88,7 @@ watch(
 );
 </script>
 <template>
-  <div>
+  <div class="mx-25">
     <h2 class="font-bold text-4xl m-4 mb-2">Popular</h2>
     <h4 class="font-normal text-lg m-4 mt-2 underline hover:cursor-pointer">
       View all ({{ movies.length }})

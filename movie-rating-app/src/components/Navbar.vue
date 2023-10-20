@@ -12,8 +12,8 @@ const props = defineProps<Props>();
 </script>
 
 <template>
-  <nav class="bg-gray-800 m-0">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+  <nav class="bg-gray-800 m-0 fixed top-0 w-full">
+    <div class="mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
