@@ -24,6 +24,6 @@ const hideHandler = (value: boolean) => {
     :style="{ width: '50vw' }"
     @update:visible="hideHandler"
   >
-    <slot> </slot>
+    <slot />
   </Dialog>
 </template>

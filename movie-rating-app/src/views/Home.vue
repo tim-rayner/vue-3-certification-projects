@@ -32,6 +32,9 @@ const togglePostMovie = (newval: boolean) => {
 
 const handleNewMovie = (newMovie: Movie) => {
   movies.value.push(newMovie);
+  if (newMovie.rating > 0) {
+    ratingChanged(newMovie, newMovie.rating);
+  }
   postMovieVisible.value = false;
 };
 </script>
