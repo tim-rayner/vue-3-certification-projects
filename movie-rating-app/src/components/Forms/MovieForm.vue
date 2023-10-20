@@ -10,16 +10,6 @@ import Rating from "@/components/Rating.vue";
 import { ref, watch, onBeforeMount } from "vue";
 import { Movie } from "@/types/movie-types";
 import { Genre } from "@/enums/movie-enums";
-/**
- * @TODO add the following form items
- *  - Title
- *  - Description
- *  - Initial Rating
- *  - Image URL
- *  - Trailer URL
- *  - Release Date
- *  - Genre
- */
 
 /**
  * @OTHERTODOS add the following nice to haves
