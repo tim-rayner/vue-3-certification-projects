@@ -7,6 +7,7 @@ import PostMovieModal from "@/components/Modal.vue";
 import NewMovieForm from "@/components/Forms/NewMovieForm.vue";
 
 const movies = ref<Movie[]>(items as Movie[]);
+const selectedMovie = ref<Movie | undefined>();
 const postMovieVisible = ref(false);
 
 const reviewedMovies = computed(() =>
@@ -37,6 +38,32 @@ const handleNewMovie = (newMovie: Movie) => {
   }
   postMovieVisible.value = false;
 };
+
+//function to edit existing movie:
+const handleMovieUpdate = (updatedMovie: Movie) => {
+  const targetIndex = movies.value.findIndex(
+    (movie) => movie.name === updatedMovie.name
+  );
+  selectedMovie.value = movies.value[targetIndex];
+  postMovieVisible.value = true;
+};
+
+const updateMovie = (updatedMovie: Movie) => {
+  //update the old movie with the new movie values
+  const targetIndex = movies.value.findIndex(
+    (movie) => movie.name === selectedMovie.value?.name
+  );
+  movies.value.splice(targetIndex, 1, updatedMovie);
+  postMovieVisible.value = false;
+};
+
+//function to remove movie from movie list
+const handleMovieDelete = (movie: Movie) => {
+  const targetIndex = movies.value.findIndex((m) => m.name === movie.name);
+  if (targetIndex !== -1) {
+    movies.value.splice(targetIndex, 1);
+  }
+};
 </script>
 <template>
   <div>
@@ -51,6 +78,8 @@ const handleNewMovie = (newMovie: Movie) => {
         <MovieCard
           :movie="movie"
           @rating-changed="(newRating) => ratingChanged(movie, newRating)"
+          @movie-updated="handleMovieUpdate"
+          @movie-deleted="handleMovieDelete"
         />
       </div>
     </div>
@@ -72,6 +101,8 @@ const handleNewMovie = (newMovie: Movie) => {
         <MovieCard
           :movie="movie"
           @rating-changed="(newRating) => ratingChanged(movie, newRating)"
+          @movie-updated="handleMovieUpdate"
+          @movie-deleted="handleMovieDelete"
         />
       </div>
     </div>
@@ -82,6 +113,10 @@ const handleNewMovie = (newMovie: Movie) => {
     :visible="postMovieVisible"
     header="Add New Movie"
   >
-    <NewMovieForm @new-movie="handleNewMovie" />
+    <NewMovieForm
+      @new-movie="handleNewMovie"
+      @movie-updated="updateMovie"
+      :movieToUpdate="selectedMovie"
+    />
   </PostMovieModal>
 </template>

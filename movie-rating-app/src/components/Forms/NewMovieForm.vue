@@ -7,7 +7,8 @@ import { useForm } from "vee-validate";
 import { addMovieSchema } from "@/validation/create-rating-validation";
 import Button from "primevue/button";
 import Rating from "@/components/Rating.vue";
-import { ref, watch } from "vue";
+import { ref, watch, onBeforeMount } from "vue";
+import { Movie } from "@/types/movie-types";
 /**
  * @TODO add the following form items
  *  - Title
@@ -24,9 +25,15 @@ import { ref, watch } from "vue";
  *  - add form validation
  *  - add CSV bulk upload
  *  - embed trailer in iframe
+ *  - AI assistance (uses perplexity to fill in form details based on a trailer url or imdb link)
  */
 
-const emit = defineEmits(["newMovie"]);
+interface Props {
+  movieToUpdate?: Movie;
+}
+
+const props = defineProps<Props>();
+const emit = defineEmits(["newMovie", "movieUpdated"]);
 
 const { values, errors, defineInputBinds, validate, setFieldValue } = useForm({
   validationSchema: addMovieSchema,
@@ -39,6 +46,20 @@ const { values, errors, defineInputBinds, validate, setFieldValue } = useForm({
     genres: [],
     inTheaters: false,
   },
+});
+
+onBeforeMount(() => {
+  if (props.movieToUpdate) {
+    const movieToUpdate = props.movieToUpdate;
+    //set field values
+    setFieldValue("name", movieToUpdate.name);
+    setFieldValue("description", movieToUpdate.description);
+    setFieldValue("image", movieToUpdate.image);
+    setFieldValue("rating", movieToUpdate.rating);
+    setFieldValue("trailer", movieToUpdate.trailer);
+    setFieldValue("genres", movieToUpdate.genres);
+    setFieldValue("inTheaters", movieToUpdate.inTheaters);
+  }
 });
 
 const nameInput = defineInputBinds("name");
@@ -71,7 +92,16 @@ const updateRating = (rating: number) => {
 const onSubmit = async () => {
   const valid = await validate();
   console.log(values);
-  if (valid.valid) emit("newMovie", values);
+  if (valid.valid) {
+    switch (props.movieToUpdate) {
+      case undefined:
+        emit("newMovie", values);
+        break;
+      default:
+        emit("movieUpdated", values);
+        break;
+    }
+  }
 };
 </script>
 

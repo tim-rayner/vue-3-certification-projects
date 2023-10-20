@@ -2,12 +2,11 @@
 import type { Movie } from "@/types/movie-types";
 import { VueFlip } from "vue-flip";
 import { ComputedRef, computed } from "vue";
-import Button from "@/components/Button.vue";
+import Button from "primevue/button";
 import Pill from "./Pill.vue";
 import Rating from "./Rating.vue";
-import { StarIcon } from "@heroicons/vue/24/solid";
 
-const emit = defineEmits(["ratingChanged"]);
+const emit = defineEmits(["ratingChanged", "movieUpdated", "movieDeleted"]);
 
 const props = defineProps<{
   movie: Movie;
@@ -86,9 +85,31 @@ const updateRating = (newRating: number) => {
             class="overlay absolute b-0 top-0 left-0 right-0 w-full h-full rounded-lg bg-black z-20 opacity-60"
           ></div>
           <div class="content z-50 relative">
-            <div class="title text-4xl font-semibold text-white">
-              {{ movie.name }}
+            <div class="header flex">
+              <div class="title text-4xl font-semibold text-white">
+                {{ movie.name }}
+              </div>
+              <div class="flex ml-auto">
+                <Button
+                  @click="emit('movieUpdated', movie)"
+                  icon="fa-solid fa-pen"
+                  severity="warning"
+                  rounded
+                  outlined
+                  aria-label="edit"
+                  class="mx-1"
+                />
+                <Button
+                  @click="emit('movieDeleted', movie)"
+                  icon="fa fa-trash"
+                  severity="danger"
+                  rounded
+                  aria-label="delete"
+                  class="mx-1"
+                />
+              </div>
             </div>
+
             <Rating :rating="movie.rating" @update-rating="updateRating" />
             <div class="flex flex-row">
               <div
@@ -103,17 +124,17 @@ const updateRating = (newRating: number) => {
             </div>
             <div class="purchase-btn-wrapper flex flex-col">
               <Button
-                size="md"
+                v-if="movie.inTheaters"
+                @click="purchase"
                 label="Book Tickets"
                 severity="primary"
-                @click="purchase"
-                v-if="movie.inTheaters"
+                class="m-1"
               />
               <Button
                 @click="watchTrailer"
-                size="md"
                 label="Watch Trailer"
                 severity="secondary"
+                class="m-1"
               />
             </div>
           </div></div
