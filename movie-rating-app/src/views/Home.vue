@@ -88,7 +88,7 @@ watch(
 );
 </script>
 <template>
-  <div class="mx-25">
+  <div class="">
     <h2 class="font-bold text-4xl m-4 mb-2">Popular</h2>
     <h4 class="font-normal text-lg m-4 mt-2 underline hover:cursor-pointer">
       View all ({{ movies.length }})
@@ -114,7 +114,7 @@ watch(
     >
       <div id="create-new" @click="postMovieVisible = true">
         <div
-          class="w-[25vw] h-[35vh] relative mx-3 border rounded-lg p-2 shadow-xl border-dashed items-center justify-center flex flex-col hover:cursor-pointer bg-gray-800"
+          class="w-[75vw] h-[55vh] md:w-[45vw] md:h-[85vh] xl:w-[25vw] xl:h-[44vh] relative mx-3 border rounded-lg p-2 shadow-xl border-dashed items-center justify-center flex flex-col hover:cursor-pointer bg-gray-800"
         >
           <p class="text-2xl text-white">Add New</p>
         </div>

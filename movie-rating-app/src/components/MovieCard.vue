@@ -34,7 +34,9 @@ const updateRating = (newRating: number) => {
 </script>
 
 <template>
-  <div class="w-[25vw] h-[35vh] relative mx-3">
+  <div
+    class="w-[75vw] h-[55vh] md:w-[45vw] md:h-[85vh] xl:w-[25vw] xl:h-[44vh] relative mx-3"
+  >
     <VueFlip
       width="100%"
       height="100%"
