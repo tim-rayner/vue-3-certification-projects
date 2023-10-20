@@ -2,13 +2,14 @@
 import { ref } from "vue";
 import profilePicture from "@/assets/pp.jpg";
 
-const menuToggled = ref(false);
-
 interface Props {
   avgRating: number;
 }
 
 const props = defineProps<Props>();
+
+const menuToggled = ref(false);
+const mobileMenuToggled = ref(false);
 </script>
 
 <template>
@@ -18,6 +19,7 @@ const props = defineProps<Props>();
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
           <button
+            @click="mobileMenuToggled = !mobileMenuToggled"
             type="button"
             class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu"
@@ -29,7 +31,7 @@ const props = defineProps<Props>();
             Icon when menu is closed.
 
             Menu open: "hidden", Menu closed: "block"
-          -->
+            -->
             <svg
               class="block h-6 w-6"
               fill="none"
@@ -204,7 +206,7 @@ const props = defineProps<Props>();
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
+    <div class="sm:hidden" id="mobile-menu" v-if="mobileMenuToggled">
       <div class="space-y-1 px-2 pb-3 pt-2">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <a
