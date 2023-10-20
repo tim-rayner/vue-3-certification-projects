@@ -8,15 +8,24 @@ import Home from "./views/Home.vue";
 */
 // import { StarIcon } from "@heroicons/vue/24/solid";
 const avgRating = ref<number>(0);
+const mobileMenuToggled = ref(false);
+
 const onRatingAvgChanged = (rating: number) => {
   avgRating.value = rating;
 };
 </script>
 
 <template>
-  <Navbar :avgRating="avgRating" />
-  <div class="layout overflow-x-hidden mt-16">
-    <Home @avg-rating-changed="onRatingAvgChanged" />
+  <Navbar
+    :avgRating="avgRating"
+    @mobileMenuToggled="(val: boolean) => (mobileMenuToggled = val)"
+  />
+
+  <div
+    class="layout overflow-x-hidden mt-16"
+    :class="{ ' mt-72 md:mt-16': mobileMenuToggled }"
+  >
+    <Home @avg-rating-changed="onRatingAvgChanged" /> {{ mobileMenuToggled }}
   </div>
 </template>
 

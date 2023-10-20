@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import profilePicture from "@/assets/pp.jpg";
 
 interface Props {
@@ -7,9 +7,17 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const emit = defineEmits(["mobileMenuToggled"]);
 
 const menuToggled = ref(false);
 const mobileMenuToggled = ref(false);
+
+watch(
+  () => mobileMenuToggled.value,
+  (newVal) => {
+    emit("mobileMenuToggled", newVal);
+  }
+);
 </script>
 
 <template>
