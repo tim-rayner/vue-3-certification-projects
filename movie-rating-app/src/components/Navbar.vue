@@ -3,6 +3,12 @@ import { ref } from "vue";
 import profilePicture from "@/assets/pp.jpg";
 
 const menuToggled = ref(false);
+
+interface Props {
+  avgRating: number;
+}
+
+const props = defineProps<Props>();
 </script>
 
 <template>
@@ -162,6 +168,9 @@ const menuToggled = ref(false);
                 @mouseleave="menuToggled = !menuToggled"
                 v-if="menuToggled"
               >
+                <span class="block px-4 py-2 text-sm text-gray-700">
+                  My Average Rating: {{ props.avgRating }}</span
+                >
                 <!-- Active: "bg-gray-100", Not Active: "" -->
                 <a
                   href="#"

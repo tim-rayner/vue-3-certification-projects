@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { items } from "@/assets/movies.json";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import type { Movie } from "@/types/movie-types";
 import MovieCard from "@/components/MovieCard.vue";
 import PostMovieModal from "@/components/Modal.vue";
 import NewMovieForm from "@/components/Forms/NewMovieForm.vue";
+
+const emit = defineEmits(["avgRatingChanged"]);
 
 const movies = ref<Movie[]>(items as Movie[]);
 const selectedMovie = ref<Movie | undefined>();
@@ -64,12 +66,32 @@ const handleMovieDelete = (movie: Movie) => {
     movies.value.splice(targetIndex, 1);
   }
 };
+
+const myAvgRating = computed(() => {
+  const ratedMovies = movies.value.filter((movie) => movie.rated);
+  const totalRating = ratedMovies.reduce((acc, movie) => {
+    return acc + movie.rating;
+  }, 0);
+  const avgRating = totalRating / ratedMovies.length;
+  if (avgRating % 1 !== 0) {
+    return avgRating.toFixed(1);
+  } else {
+    return avgRating;
+  }
+});
+
+watch(
+  () => reviewedMovies.value,
+  () => {
+    emit("avgRatingChanged", myAvgRating.value);
+  }
+);
 </script>
 <template>
   <div>
     <h2 class="font-bold text-4xl m-4 mb-2">Popular</h2>
     <h4 class="font-normal text-lg m-4 mt-2 underline hover:cursor-pointer">
-      View all...
+      View all ({{ movies.length }})
     </h4>
     <div
       class="flex flex-row movies overflow-x-scroll no-scrollbar scrollbar-draggable pt-2"
