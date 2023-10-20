@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 const titleRules = yup.string().required().min(3).max(30);
 const descriptionRules = yup.string().required().min(3);
-const ratingRules = yup.number().required().min(1).max(5);
+const ratingRules = yup.number().max(5);
 const trailerRules = yup.string().required();
 const genreRules = yup.array().min(1).required();
 const inTheatersRules = yup.boolean().required();

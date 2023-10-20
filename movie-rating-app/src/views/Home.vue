@@ -4,7 +4,7 @@ import { computed, ref, watch } from "vue";
 import type { Movie } from "@/types/movie-types";
 import MovieCard from "@/components/MovieCard.vue";
 import PostMovieModal from "@/components/Modal.vue";
-import NewMovieForm from "@/components/Forms/NewMovieForm.vue";
+import MovieForm from "@/components/Forms/MovieForm.vue";
 
 const emit = defineEmits(["avgRatingChanged"]);
 
@@ -94,7 +94,7 @@ watch(
       View all ({{ movies.length }})
     </h4>
     <div
-      class="flex flex-row movies overflow-x-scroll no-scrollbar scrollbar-draggable pt-2"
+      class="flex flex-row movies overflow-x-scroll no-scrollbar scrollbar-draggable pt-2 overflow-y-hidden"
     >
       <div v-for="movie in topMovies">
         <MovieCard
@@ -110,7 +110,7 @@ watch(
     <h2 class="font-bold text-4xl m-4 mb-2">Recently reviewed</h2>
 
     <div
-      class="flex flex-row movies overflow-x-scroll no-scrollbar scrollbar-draggable pt-2"
+      class="flex flex-row movies overflow-x-scroll no-scrollbar scrollbar-draggable pt-2 overflow-y-hidden"
     >
       <div id="create-new" @click="postMovieVisible = true">
         <div
@@ -135,7 +135,7 @@ watch(
     :visible="postMovieVisible"
     header="Add New Movie"
   >
-    <NewMovieForm
+    <MovieForm
       @new-movie="handleNewMovie"
       @movie-updated="updateMovie"
       :movieToUpdate="selectedMovie"

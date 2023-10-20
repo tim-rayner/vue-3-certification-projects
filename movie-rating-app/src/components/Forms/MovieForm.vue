@@ -9,6 +9,7 @@ import Button from "primevue/button";
 import Rating from "@/components/Rating.vue";
 import { ref, watch, onBeforeMount } from "vue";
 import { Movie } from "@/types/movie-types";
+import { Genre } from "@/enums/movie-enums";
 /**
  * @TODO add the following form items
  *  - Title
@@ -48,6 +49,9 @@ const { values, errors, defineInputBinds, validate, setFieldValue } = useForm({
   },
 });
 
+const inTheatresVal = ref(false);
+const genresVal = ref<Genre[]>([]);
+
 onBeforeMount(() => {
   if (props.movieToUpdate) {
     const movieToUpdate = props.movieToUpdate;
@@ -57,8 +61,9 @@ onBeforeMount(() => {
     setFieldValue("image", movieToUpdate.image);
     setFieldValue("rating", movieToUpdate.rating);
     setFieldValue("trailer", movieToUpdate.trailer);
-    setFieldValue("genres", movieToUpdate.genres);
-    setFieldValue("inTheaters", movieToUpdate.inTheaters);
+
+    genresVal.value = movieToUpdate.genres;
+    inTheatresVal.value = movieToUpdate.inTheaters;
   }
 });
 
@@ -67,9 +72,6 @@ const descriptionInput = defineInputBinds("description");
 const imageInput = defineInputBinds("image");
 const ratingInput = defineInputBinds("rating");
 const trailerInput = defineInputBinds("trailer");
-
-const inTheatresVal = ref(false);
-const genresVal = ref([]);
 
 watch(
   () => inTheatresVal.value,
@@ -156,7 +158,7 @@ const onSubmit = async () => {
     <div class="flex flex-col gap-2">
       <label for="rating">Rating</label>
       <Rating
-        :rating="ratingInput.value"
+        :rating="ratingInput.value!"
         :functional="true"
         @update-rating="updateRating"
       />
